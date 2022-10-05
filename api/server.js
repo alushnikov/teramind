@@ -12,7 +12,16 @@ app.use(cors(corsOptions));
 
 const initRoutes = require("./src/routes");
 
+
+// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+// database
+const db = require("./src/models");
+const Role = db.role;
+
+db.sequelize.sync();
+
 initRoutes(app);
 
 let port = 8080;
