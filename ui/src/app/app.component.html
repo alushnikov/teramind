@@ -1,6 +1,8 @@
 <div class="container" style="width:600px">
-  <div class="my-3">
+  <div class="my-3 d-flex flex-row justify-content-between">
     <h4>File Upload App</h4>
+
+    <button *ngIf="loggedIn | async" class="btn btn-primary" (click)="signout()">Signout</button>
   </div>
 
   <router-outlet></router-outlet>

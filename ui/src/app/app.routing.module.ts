@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'files', component: UploadFilesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
