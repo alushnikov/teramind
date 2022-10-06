@@ -9,6 +9,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 const initRoutes = require("./src/routes");
 
@@ -18,9 +19,27 @@ app.use(express.urlencoded({ extended: true }));
 
 // database
 const db = require("./src/models");
-const Role = db.role;
 
-db.sequelize.sync();
+// drop and recreate
+const Role = db.role;
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('Drop and Resync Database with { force: true }');
+
+  Role.create({
+    id: 1,
+    name: "user"
+  });
+
+  Role.create({
+    id: 2,
+    name: "moderator"
+  });
+
+  Role.create({
+    id: 3,
+    name: "admin"
+  });
+});
 
 initRoutes(app);
 
