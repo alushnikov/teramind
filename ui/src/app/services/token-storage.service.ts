@@ -21,16 +21,18 @@ export class TokenStorageService {
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    this.loggedIn.next(!!token)
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+    const token = window.sessionStorage.getItem(TOKEN_KEY);
+    this.loggedIn.next(!!token)
+    return token
   }
 
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    this.loggedIn.next(true)
   }
 
   public getLoggedIn(): Observable<boolean> {
